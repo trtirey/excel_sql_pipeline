@@ -65,13 +65,20 @@ def read_query(connection, query):
         print(f"Error: '{err}'")
 
 if __name__ == "__main__" :
-    # # Create the database
-    # serv_connection = create_server_connection("localhost", "root", get_password())
-    # create_db_query = "CREATE DATABASE sales"
-    # create_database(serv_connection, create_db_query)
-    # serv_connection.disconnect()
+    # 
+    host_name = "localhost"
+    user_name= "root"
+    pw = get_password()
+    db_name = "Sales"
+    table_name = "sales"
 
-    #create the server
+    # Create the database
+    serv_connection = create_server_connection(host_name, user_name, pw)
+    create_db_query = f'CREATE DATABASE {db_name}'
+    create_database(serv_connection, create_db_query)
+    serv_connection.disconnect()
+
+    # Define table structure
     create_sales_table = """
     CREATE TABLE sales (
         sale_id INT PRIMARY KEY,
@@ -83,6 +90,7 @@ if __name__ == "__main__" :
         location VARCHAR(30)
         );
     """
-    db_connection = create_db_connection("localhost", "root", get_password(), "sales")
+    # Create table
+    db_connection = create_db_connection(host_name, user_name, pw, table_name)
     execute_query(db_connection, create_sales_table)
     db_connection.disconnect()
