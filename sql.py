@@ -76,8 +76,10 @@ if __name__ == "__main__" :
         email VARCHAR(40),
         gender VARCHAR(1),
         date DATE NOT NULL,
+        total DECIMAL(6,2),
         location VARCHAR(30)
         );
     """
     db_connection = create_db_connection("localhost", "root", get_password(), "sales")
     execute_query(db_connection, create_sales_table)
+    db_connection.disconnect()
